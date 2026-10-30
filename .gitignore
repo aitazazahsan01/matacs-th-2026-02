@@ -1,0 +1,13 @@
+# Brief must not be redistributed
+*.pdf
+!diagram/*.pdf
+.env
+__pycache__/
+*.pyc
+
+# Live extraction output contains quotes from proposal text - keep local
+prototype/output/extraction*.json
+prototype/samples/
+# Scorer outputs are regenerated on every run; keep only the recorded live result
+prototype/output/*
+!prototype/output/ranking_live.json

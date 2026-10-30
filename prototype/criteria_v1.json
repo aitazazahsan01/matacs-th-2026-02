@@ -1,0 +1,249 @@
+{
+  "category": "Commercial Solar Installation",
+  "criteria_version": 1,
+  "saved_by": "admin",
+  "saved_at": "2026-10-30T09:00:00Z",
+  "project": {
+    "description": "150 kW rooftop solar system on a warehouse in Windsor, Ontario",
+    "budget_ceiling_cad": 260000,
+    "max_completion_weeks": 16,
+    "reference_year": 2026
+  },
+  "criteria": [
+    {
+      "id": "licence",
+      "name": "Ontario electrical contractor licence",
+      "type": "mandatory",
+      "guidance": "Licence held by the bidder itself and stated in the proposal.",
+      "fields": [
+        {
+          "name": "licence_holder",
+          "type": "enum",
+          "values": [
+            "bidder",
+            "subcontractor",
+            "not_stated"
+          ],
+          "description": "Who holds the Ontario electrical contractor licence for this work. 'subcontractor' if the bidder relies on another company's licence."
+        },
+        {
+          "name": "licence_number",
+          "type": "string",
+          "description": "The licence number exactly as written, or null if none is given."
+        }
+      ],
+      "rule": {
+        "kind": "pass_if_all",
+        "conditions": [
+          {
+            "field": "licence_holder",
+            "op": "eq",
+            "value": "bidder"
+          },
+          {
+            "field": "licence_number",
+            "op": "present"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wsib_insurance",
+      "name": "WSIB clearance and $5M liability insurance",
+      "type": "mandatory",
+      "guidance": "Both WSIB clearance and at least $5M liability insurance confirmed in the proposal.",
+      "fields": [
+        {
+          "name": "wsib_clearance",
+          "type": "boolean",
+          "description": "True only if the proposal states the bidder has current WSIB clearance."
+        },
+        {
+          "name": "liability_insurance_cad",
+          "type": "number",
+          "description": "Liability insurance coverage in CAD (e.g. 5000000 for $5M), or null if not stated."
+        }
+      ],
+      "rule": {
+        "kind": "pass_if_all",
+        "conditions": [
+          {
+            "field": "wsib_clearance",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "liability_insurance_cad",
+            "op": "gte",
+            "value": 5000000
+          }
+        ]
+      }
+    },
+    {
+      "id": "experience",
+      "name": "Relevant experience",
+      "type": "weighted",
+      "weight": 30,
+      "guidance": "Commercial installs of 100 kW or more completed in the last 5 years.",
+      "fields": [
+        {
+          "name": "qualifying_installs",
+          "type": "integer",
+          "description": "Number of completed commercial installations of 100 kW or more that the proposal states. Null if no count is given."
+        },
+        {
+          "name": "earliest_year_claimed",
+          "type": "integer",
+          "description": "The earliest year the stated installs could date from (e.g. 'since 2020' gives 2020; 'past four years' gives reference year minus 4). Null if not stated."
+        }
+      ],
+      "rule": {
+        "kind": "bands",
+        "field": "qualifying_installs",
+        "bands": [
+          {
+            "min": 12,
+            "score": 100
+          },
+          {
+            "min": 10,
+            "score": 85
+          },
+          {
+            "min": 8,
+            "score": 70
+          },
+          {
+            "min": 5,
+            "score": 50
+          },
+          {
+            "min": 1,
+            "score": 25
+          }
+        ],
+        "on_missing": "zero",
+        "warn_if": {
+          "field": "earliest_year_claimed",
+          "op": "lt",
+          "value_from": "reference_year_minus_5",
+          "message": "Some claimed installs may be older than 5 years; reviewer should confirm the count."
+        }
+      }
+    },
+    {
+      "id": "price",
+      "name": "Price",
+      "type": "weighted",
+      "weight": 25,
+      "guidance": "Lower total cost within the budget ceiling.",
+      "fields": [
+        {
+          "name": "total_price_cad",
+          "type": "number",
+          "description": "Total all-in price in CAD as a plain number, or null if not stated."
+        }
+      ],
+      "rule": {
+        "kind": "lowest_is_best",
+        "field": "total_price_cad",
+        "limit_from": "budget_ceiling_cad",
+        "on_missing": "flag",
+        "on_over_limit": "flag"
+      }
+    },
+    {
+      "id": "timeline",
+      "name": "Timeline",
+      "type": "weighted",
+      "weight": 15,
+      "guidance": "Shorter completion time within 16 weeks.",
+      "fields": [
+        {
+          "name": "completion_weeks",
+          "type": "number",
+          "description": "Committed completion time in weeks from award, or null if no firm duration is given."
+        }
+      ],
+      "rule": {
+        "kind": "lowest_is_best",
+        "field": "completion_weeks",
+        "limit_from": "max_completion_weeks",
+        "on_missing": "flag",
+        "on_over_limit": "flag"
+      }
+    },
+    {
+      "id": "warranty",
+      "name": "Warranty",
+      "type": "weighted",
+      "weight": 15,
+      "guidance": "Length of panel and workmanship warranties.",
+      "fields": [
+        {
+          "name": "panel_warranty_years",
+          "type": "number",
+          "description": "Panel (manufacturer) warranty length in years, or null."
+        },
+        {
+          "name": "workmanship_warranty_years",
+          "type": "number",
+          "description": "Workmanship (installation) warranty length in years, or null."
+        }
+      ],
+      "rule": {
+        "kind": "highest_is_best_parts",
+        "parts": [
+          {
+            "field": "panel_warranty_years",
+            "share": 50
+          },
+          {
+            "field": "workmanship_warranty_years",
+            "share": 50
+          }
+        ],
+        "on_missing": "zero"
+      }
+    },
+    {
+      "id": "team",
+      "name": "Team and approach",
+      "type": "weighted",
+      "weight": 15,
+      "guidance": "Named project lead, crew, safety and monitoring plan.",
+      "fields": [
+        {
+          "name": "named_project_lead",
+          "type": "boolean",
+          "description": "True if a specific project lead or manager is committed (named or identified as a dedicated role now), false if only 'to be assigned'."
+        },
+        {
+          "name": "crew_described",
+          "type": "boolean",
+          "description": "True if the installation crew is described (size or composition)."
+        },
+        {
+          "name": "safety_plan",
+          "type": "boolean",
+          "description": "True if a site safety plan is included."
+        },
+        {
+          "name": "monitoring_plan",
+          "type": "boolean",
+          "description": "True if post-installation system performance monitoring is offered. Progress reporting during construction does not count."
+        }
+      ],
+      "rule": {
+        "kind": "checklist",
+        "fields": [
+          "named_project_lead",
+          "crew_described",
+          "safety_plan",
+          "monitoring_plan"
+        ]
+      }
+    }
+  ]
+}
