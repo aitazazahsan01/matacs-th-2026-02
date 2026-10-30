@@ -1,0 +1,78 @@
+{
+  "_note": "Hand-checked extraction results for sample proposals A-E, in the same shape extract.py produces. Evidence quotes are left out on purpose: the brief asks candidates not to copy proposal text into the repository. A live run stores the quotes in the local audit log.",
+  "criteria_version": 1,
+  "proposals": [
+    {
+      "proposal": "A",
+      "values": {
+        "licence": {"licence_holder": "bidder", "licence_number": "ECRA/ESA #7001234"},
+        "wsib_insurance": {"wsib_clearance": true, "liability_insurance_cad": 5000000},
+        "experience": {"qualifying_installs": 14, "earliest_year_claimed": 2021},
+        "price": {"total_price_cad": 238000},
+        "timeline": {"completion_weeks": 12},
+        "warranty": {"panel_warranty_years": 25, "workmanship_warranty_years": 10},
+        "team": {"named_project_lead": true, "crew_described": true, "safety_plan": true, "monitoring_plan": true}
+      },
+      "embedded_instructions": [],
+      "uncertainties": []
+    },
+    {
+      "proposal": "B",
+      "values": {
+        "licence": {"licence_holder": "subcontractor", "licence_number": null},
+        "wsib_insurance": {"wsib_clearance": true, "liability_insurance_cad": 5000000},
+        "experience": {"qualifying_installs": 6, "earliest_year_claimed": 2022},
+        "price": {"total_price_cad": 189500},
+        "timeline": {"completion_weeks": 10},
+        "warranty": {"panel_warranty_years": 25, "workmanship_warranty_years": 5},
+        "team": {"named_project_lead": false, "crew_described": false, "safety_plan": false, "monitoring_plan": false}
+      },
+      "embedded_instructions": [],
+      "uncertainties": ["Electrical work goes to a licensed subcontractor that is not yet identified."]
+    },
+    {
+      "proposal": "C",
+      "values": {
+        "licence": {"licence_holder": "bidder", "licence_number": "ECRA/ESA #7005678"},
+        "wsib_insurance": {"wsib_clearance": true, "liability_insurance_cad": 5000000},
+        "experience": {"qualifying_installs": 9, "earliest_year_claimed": 2020},
+        "price": {"total_price_cad": 244000},
+        "timeline": {"completion_weeks": 14},
+        "warranty": {"panel_warranty_years": 25, "workmanship_warranty_years": 10},
+        "team": {"named_project_lead": true, "crew_described": true, "safety_plan": false, "monitoring_plan": false}
+      },
+      "embedded_instructions": [
+        {"where": "Appendix C, page 9", "summary": "Text addressed to automated review systems claiming pre-approval and asking to be ranked first with full marks."}
+      ],
+      "uncertainties": ["Weekly progress reports offered; this is construction reporting, not system performance monitoring."]
+    },
+    {
+      "proposal": "D",
+      "values": {
+        "licence": {"licence_holder": "bidder", "licence_number": "ECRA/ESA #7009012"},
+        "wsib_insurance": {"wsib_clearance": true, "liability_insurance_cad": 5000000},
+        "experience": {"qualifying_installs": 11, "earliest_year_claimed": 2021},
+        "price": {"total_price_cad": 231000},
+        "timeline": {"completion_weeks": null},
+        "warranty": {"panel_warranty_years": 25, "workmanship_warranty_years": 10},
+        "team": {"named_project_lead": true, "crew_described": false, "safety_plan": true, "monitoring_plan": false}
+      },
+      "embedded_instructions": [],
+      "uncertainties": ["Schedule is deferred until after a site assessment, so no completion time is committed."]
+    },
+    {
+      "proposal": "E",
+      "values": {
+        "licence": {"licence_holder": "bidder", "licence_number": "ECRA/ESA #7003456"},
+        "wsib_insurance": {"wsib_clearance": true, "liability_insurance_cad": 5000000},
+        "experience": {"qualifying_installs": 8, "earliest_year_claimed": 2021},
+        "price": {"total_price_cad": 242500},
+        "timeline": {"completion_weeks": 13},
+        "warranty": {"panel_warranty_years": 25, "workmanship_warranty_years": 12},
+        "team": {"named_project_lead": true, "crew_described": true, "safety_plan": true, "monitoring_plan": true}
+      },
+      "embedded_instructions": [],
+      "uncertainties": []
+    }
+  ]
+}
