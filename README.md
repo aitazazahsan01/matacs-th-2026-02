@@ -12,6 +12,8 @@
 
 | File | What it is |
 |---|---|
+| [diagram/process_flow.png](diagram/process_flow.png) | Process flow from upload to ranked output (AI steps, rule steps, human checkpoints) |
+| [WRITEUP.md](WRITEUP.md) | Answers to the five questions, plus assumptions |
 | [PROMPTS.md](PROMPTS.md) | The extraction prompt exactly as sent, with call settings |
 | [ranking.json](ranking.json) | Expected ranking of proposals A–E |
 | [prototype/](prototype/) | Runnable scorer and extraction script |
