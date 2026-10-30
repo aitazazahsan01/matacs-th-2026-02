@@ -37,8 +37,16 @@
 | [prototype/extract.py](prototype/extract.py) | AI step: one Gemini call per proposal, quote verification, injection pre-scan |
 | [prototype/score.py](prototype/score.py) | Rules step: mandatory gates, weighted scores, flags, ranking (no AI) |
 | [prototype/fixtures/expected_extraction.json](prototype/fixtures/expected_extraction.json) | Hand-checked facts for A–E, so scoring runs without an API key |
+| [prototype/output/ranking_live.json](prototype/output/ranking_live.json) | Ranking produced from the live Gemini run |
 
 ```bash
 cd prototype
-python score.py
+python score.py                     # scores A-E from the fixture, prints the breakdown
+
+# Live AI extraction with Gemini:
+pip install -r requirements.txt
+python extract.py
+python score.py --extraction output/extraction.json
 ```
+
+**Live test:** running `extract.py` with `gemini-3.8-flash` on A–E reproduced the hand-checked fixture exactly (all 25 fields). No quotes failed verification, and Proposal C's hidden instruction was caught by both the model and the keyword pre-scan. The scorer output from that run is in [prototype/output/ranking_live.json](prototype/output/ranking_live.json).

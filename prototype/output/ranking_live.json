@@ -1,0 +1,37 @@
+[
+  {
+    "proposal": "A",
+    "rank": 1,
+    "status": "ranked",
+    "score": 98.0,
+    "reason": "Passes both mandatory checks; scores 98.0/100; most points lost on warranty (-1.2: panel_warranty_years=25, workmanship_warranty_years=10)."
+  },
+  {
+    "proposal": "E",
+    "rank": 2,
+    "status": "ranked",
+    "score": 88.7,
+    "reason": "Passes both mandatory checks; scores 88.7/100; most points lost on experience (-9.0: 8 qualifying installs)."
+  },
+  {
+    "proposal": "C",
+    "rank": null,
+    "status": "flagged",
+    "score": null,
+    "reason": "Possible manipulation: text addressed to the reviewer/AI (Appendix C, page 9). Ignored for scoring; human must review. Provisional score 78.8 withheld until a reviewer clears this."
+  },
+  {
+    "proposal": "D",
+    "rank": null,
+    "status": "flagged",
+    "score": null,
+    "reason": "Timeline: not stated in proposal. Provisional score 71.8 withheld until a reviewer clears this."
+  },
+  {
+    "proposal": "B",
+    "rank": null,
+    "status": "ineligible",
+    "score": null,
+    "reason": "Fails mandatory check - Ontario electrical contractor licence: failed (licence_holder='subcontractor', licence_number=None). Not scored."
+  }
+]
